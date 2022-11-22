@@ -419,7 +419,7 @@ const flattenSafe = obj => {
   });
   console.log("flattenedObj:", flattenedObj)
   for (let key in flattenedObj) {
-    if (!flattenedObj[key]) {
+    if (flattenedObj[key] === undefined) {
       console.log("deleting key", key, "in flattened object as value is falsey")
       delete flattenedObj[key];
     }
