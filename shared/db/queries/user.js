@@ -865,16 +865,20 @@ export const editUser = createWriteQuery(
             .collection('users')
             .findOne({ id: userId })
             .then(result => {
-              return Object.assign({}, result, {
+              console.log("editUser -- result:", result);
+
+              return Object.assign({}, {
                 name,
                 description,
                 website,
                 username,
                 timezone,
                 modifiedAt: new Date(),
-              });
+              }, result);
             })
             .then(user => {
+              console.log("editUser -- user:", user);
+
               if (user.username) {
                 searchQueue.add({
                   id: user.id,
@@ -983,6 +987,9 @@ export const editUser = createWriteQuery(
                   });
                 }
               } else {
+                console.log("editUser -- user flattenSafe: ", dbUtil.flattenSafe({
+                  ...user,
+                }));
                 return dbUtil
                   .updateOne(
                     db,
@@ -997,6 +1004,7 @@ export const editUser = createWriteQuery(
                     }
                   )
                   .then(result => {
+                    console.log("edit -- +++ result:", result);
                     return result[0];
                   });
               }
