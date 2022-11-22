@@ -154,7 +154,7 @@ export const addThreadReaction = (input: ThreadReactionInput, userId: string): P
       return db
         .collection('threadReactions')
         .find({ 
-          threadId: threadId,
+          threadId: input.threadId,
           userId: userId 
         })
         .toArray()
@@ -199,6 +199,7 @@ export const addThreadReaction = (input: ThreadReactionInput, userId: string): P
 
           return dbUtil
             .insert(
+              db,
               'threadReactions',
               {
                 ...input,
