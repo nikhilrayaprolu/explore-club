@@ -109,8 +109,8 @@ const updateOne = async (db, collection, filter, update) => {
   return db
     .collection(collection)
     .updateOne(filter, update)
-    .then(() => {
-      return [db.collection(collection).findOne({ id: matchedDocument.id })];
+    .then(async () => {
+      return [await db.collection(collection).findOne({ id: matchedDocument.id })];
     });
 };
 
@@ -414,9 +414,17 @@ const tryCall = (funcName, func, defaultValue) => {
 };
 
 const flattenSafe = obj => {
-  return flatten(obj, {
+  const flattenedObj = flatten(obj, {
     safe: true,
   });
+  console.log("flattenedObj:", flattenedObj)
+  for (let key in flattenedObj) {
+    if (!flattenedObj[key]) {
+      console.log("deleting key", key, "in flattened object as value is falsey")
+      delete flattenedObj[key];
+    }
+  }
+  return flattenedObj;
 };
 
 const generateUuid = () => {
