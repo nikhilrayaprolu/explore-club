@@ -279,6 +279,7 @@ export const storeMessage = (message: Object, userId: string): Promise<DBMessage
     () => {
       return dbUtil
         .insert(
+          db,
           'messages',
           Object.assign({}, message, {
             timestamp: new Date(),
@@ -293,6 +294,7 @@ export const storeMessage = (message: Object, userId: string): Promise<DBMessage
           }),
         )
         .then(results => {
+          console.log("")
           return results[0];
         })
         .then(result => {

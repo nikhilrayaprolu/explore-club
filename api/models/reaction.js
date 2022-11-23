@@ -34,7 +34,7 @@ export const getReactions = (messageIds: Array<string>): Promise<Array<DBReactio
         .collection('reactions')
         .find({ messageId: { $in: distinctMessageIds }, deletedAt: null })
         .toArray();
-      ret = dbUtil.group("messageId");
+      ret = dbUtil.group(ret, "messageId");
       return ret;
     },
     []
