@@ -1,7 +1,7 @@
 // @flow
 import theme from 'shared/theme';
 import styled, { css } from 'styled-components';
-import ReactImage from 'react-image';
+import { Img as ReactImage } from 'react-image';
 import { zIndex } from '../globals';
 import { Link } from 'react-router-dom';
 import { ProfileHeaderAction } from '../profile/style';

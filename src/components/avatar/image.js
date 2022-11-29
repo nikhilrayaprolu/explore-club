@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Img, FallbackImg, LoadingImg } from './style';
 import VisibilitySensor from 'react-visibility-sensor';
-
+// import Img from 'react-image';
 type Props = {
   src: any,
   type: 'user' | 'community',
@@ -16,6 +16,7 @@ export default class Image extends React.Component<Props> {
   render() {
     const { type, size, mobilesize } = this.props;
     const { ...rest } = this.props;
+    // console.log(rest)
     const fallbackSrc =
       type === 'user'
         ? '/img/default_avatar.svg'

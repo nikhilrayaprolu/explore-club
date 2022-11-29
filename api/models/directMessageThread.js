@@ -130,6 +130,7 @@ const getDirectMessageThreadsByUser = (
 //       return result.changes[0].new_val
 //     });
 // };
+
 const createDirectMessageThread = (isGroup: boolean, userId: string): DBDirectMessageThread => {
   return dbUtil
     .insert(
@@ -144,6 +145,7 @@ const createDirectMessageThread = (isGroup: boolean, userId: string): DBDirectMe
       }
     )
     .then(results => {
+      dbUtil.pubsub.publish("DIRECT_MESSAGE_THREAD_UPDATED", results[0])
       return results[0]
     })
 };

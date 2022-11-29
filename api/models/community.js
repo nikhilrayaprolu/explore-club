@@ -939,7 +939,7 @@ export const editCommunity = ({ input }: EditCommunityInput, userId: string): Pr
           })
           .then(result => {
             // #marker 
-            // dbUtil.pubsub.publish("COMMUNITY_UPDATED", result)
+            dbUtil.pubsub.publish("COMMUNITY_UPDATED", result)
 
             return result;
           })
