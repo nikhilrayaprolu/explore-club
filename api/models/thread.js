@@ -140,6 +140,7 @@ export const getThreadsByChannel = (channelId: string, options: PaginationOption
         })
         .sort({ channelId: -1, lastActive: -1 })
         .limit(first)
+        .toArray();
     },
     []
   )
