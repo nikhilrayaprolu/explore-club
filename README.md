@@ -1,16 +1,16 @@
 <div align="center">
 
-  [![Spectrum](./public/img/media.png)](https://spectrum.chat)
 
   ### Simple, powerful online communities.
 
 </div>
 
-This is the main monorepo codebase of [Spectrum](https://spectrum.chat). Every single line of code that's not packaged into a reusable library is in this repository.
 
-## What is Spectrum?
+## What is Explore?
 
 ### Vision
+
+Explore Club is a fork of [Spectrum](https://github.com/withspectrum/spectrum), Replacing RethinkDB with MongoDB as database and Realtime features of RethinkDB with Apollo PubSub. The product is still in Alpha stage and not yet ready for production use.
 
 It is difficult to grow, manage and measure the impact of online communities. Community owners need modern, chat-based communities but are running into scaling issues when their community grows beyond a few hundred members. It becomes hard to keep track of who's who, know what conversations are happening, and ensure that the community is staying healthy and productive.
 
@@ -157,6 +157,8 @@ or use `https` link as a fallback.
 git clone https://github.com/withspectrum/spectrum.git
 ```
 
+
+
 #### Installation
 
 Spectrum has four big installation steps:
@@ -172,34 +174,24 @@ Spectrum has four big installation steps:
 
 You've now finished installing everything! Let's migrate the database and you'll be ready to go :100:
 
-#### Migrating the database
 
-When you first download the code and want to run it locally you have to migrate the database and seed it with test data. First, start rethinkdb in its own terminal tab:
+#### MongoDB Installation
+As the project now uses MongoDB, the MongoDB service needs to be running in the background.
 
-```sh
-rethinkdb
-```
+MongoDB can be downloaded from: Click to Visit
 
-Then, in a new tab, run these commands:
+Additionally MongoDB can also be downloaded to help with development: Click to Visit
 
-```sh
-yarn run db:migrate
-yarn run db:seed
-# ⚠️ To empty the database (e.g. if there's faulty data) run yarn run db:drop
-```
+If MongoDB is installed as a service then no further steps are required, otherwise it will need to be started manually.
+Migrating the database
+As mentioned in the update report, migrations can no longer be performed using the existing “db:migrate” command.
 
-There's a shortcut for dropping, migrating and seeding the database too:
-```sh
-yarn run db:reset
-```
+For this purpose a new script is created called “migrateUp.js” inside “api/migrations”.
 
-The `testing` database used in end to end tests is managed separately. It is built, migrated, and seeded when you run:
+To run migrations simply execute this command in the terminal:
+“node ./api/migrations/migateUp”.
 
-```sh
-yarn run start:api:test
-```
-
-To drop the `testing` database, go to http://localhost:8080/#tables while `rethinkdb` is running, and click Delete Database on the appropriate database.
+This will create the initial collections and documents and perform other necessary migration steps.
 
 #### Getting the secrets
 
